@@ -20,13 +20,16 @@ public class GMapsController {
     public GMapsController(GRider oApp) {
         this.oApp = oApp;
     }
-    
+    public void setRoute(boolean isUserRoute){
+        pbRoute = isUserRoute;
+    }
     @FXML
     private Button btnExit;
 
     @FXML
     private WebView sceneWeb;
     private WebEngine webengine;
+    private boolean pbRoute = false;
 
     private void toJSONArray() {
         String lsSQL = System.getProperty("app.sql.source");
@@ -79,10 +82,10 @@ public class GMapsController {
             if (jsonObject.equals("[]")) System.exit(1);
                 webengine = sceneWeb.getEngine();
                 webengine.setJavaScriptEnabled(true);
-                webengine.load(System.getProperty("system.websvr") + "integsys/gMaps/index.php");
+                            webengine.load("http://192.168.10.69/integsys/gMaps/index.php");
                 webengine.getLoadWorker().stateProperty().addListener((obs, oldValue, newValue) -> {
                     if (newValue == Worker.State.SUCCEEDED) {
-                        webengine.executeScript("receiveJsonFromJava(" + jsonObject + ");");
+                        webengine.executeScript("receiveJsonFromJava(" + jsonObject + ", "+ pbRoute +");");
                         System.out.println("Success");
                     }
                 });

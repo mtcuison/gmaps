@@ -38,6 +38,7 @@ public class SelfieRoute extends Application{
         GMapsController controller = new GMapsController(poGRider);
 
         fxmlLoader.setController(controller);
+        controller.setRoute(false);
         Parent parent = fxmlLoader.load();
         
 
