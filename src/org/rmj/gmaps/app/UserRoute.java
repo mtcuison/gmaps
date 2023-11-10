@@ -38,6 +38,7 @@ public class UserRoute extends Application{
         GMapsController controller = new GMapsController(poGRider);
 
         fxmlLoader.setController(controller);
+        controller.setRoute(true);
         Parent parent = fxmlLoader.load();
         
 
